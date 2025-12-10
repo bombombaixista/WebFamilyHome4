@@ -1,13 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ValidateController : ControllerBase
+namespace WebFamilyHome.Controllers
 {
-    [HttpGet]
-    public IActionResult Get()
+    public class ValidateController : Controller
     {
-        // lógica de validação (ex: checar licença, token, etc.)
-        return Ok(new { status = "valid" });
+        [HttpGet]
+        public IActionResult Index()
+        {
+            // 👉 Renderiza a View (Views/Validate/Index.cshtml)
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(string token)
+        {
+            if (token == "minha_chave_secreta")
+            {
+                // ✅ Token válido → redireciona para o Kanban
+                return Redirect("https://kanban-seuapp.com/Home/Index");
+            }
+            else
+            {
+                // ❌ Token inválido → mostra erro na própria tela
+                ViewBag.Erro = "Token inválido!";
+                return View();
+            }
+        }
     }
 }

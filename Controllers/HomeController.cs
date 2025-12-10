@@ -1,32 +1,36 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebFamilyHome.Models;
 
 namespace WebFamilyHome.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            ViewData["Title"] = "Página Inicial";
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewData["Title"] = "Privacidade";
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Login()
+        {
+            ViewData["Title"] = "Login";
+            return View();
+        }
+
+        public IActionResult Cadastro()
+        {
+            ViewData["Title"] = "Cadastro";
+            return View();
+        }
+
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

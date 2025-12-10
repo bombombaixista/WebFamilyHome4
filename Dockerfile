@@ -1,18 +1,25 @@
-# Etapa de build (SDK 9.0)
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /src
-COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish
+# Etapa base: runtime ASP.NET
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# Etapa de runtime (ASP.NET 9.0)
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+# Etapa de build: SDK para compilar e publicar
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copia o arquivo de projeto e restaura dependências
+COPY WebFamilyHome.csproj ./
+RUN dotnet restore WebFamilyHome.csproj
+
+# Copia o restante do código da pasta local
+COPY . .
+
+# Publica em Release
+RUN dotnet publish WebFamilyHome.csproj -c Release -o /app/publish
+
+# Etapa final: imagem enxuta só com runtime
+FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
-
-# Configura a porta do Railway
-ENV ASPNETCORE_URLS=http://+:${PORT}
-EXPOSE 5000
-
-# Nome correto do DLL (Kanban.dll)
-ENTRYPOINT ["dotnet", "Kanban.dll"]
+ENTRYPOINT ["dotnet", "WebFamilyHome.dll"]

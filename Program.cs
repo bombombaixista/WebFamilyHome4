@@ -1,9 +1,9 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WebFamilyHome.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// PostgreSQL
+// Configuração do banco PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Middleware padr�o
+// Middleware padrão
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -25,9 +25,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// Rota padr�o MVC
+// 👉 Rota padrão: raiz "/" chama ValidateController.Index
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Validate}/{action=Index}/{id?}");
 
 app.Run();

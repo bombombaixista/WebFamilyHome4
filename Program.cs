@@ -3,7 +3,7 @@ using WebFamilyHome.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do banco PostgreSQL
+// PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -25,9 +25,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// 👉 Rota padrão: raiz "/" chama ValidateController.Index
+// Rota padrão MVC
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Validate}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

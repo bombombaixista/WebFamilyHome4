@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebFamilyHome.Models
 {
-    [Table("Groups")] // força o nome da tabela
+    [Table("Groups")]
     public class Group
     {
         public int Id { get; set; }

@@ -1,0 +1,38 @@
+@model WebFamilyHome.Models.User
+
+@{
+    ViewData["Title"] = "Editar Usuário";
+}
+
+<h2>Editar Usuário</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="UserName" class="control-label"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NomeCompleto" class="control-label"></label>
+        <input asp-for="NomeCompleto" class="form-control" />
+        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GroupId" class="control-label"></label>
+        <input asp-for="GroupId" class="form-control" />
+        <span asp-validation-for="GroupId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</form>

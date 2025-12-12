@@ -31,7 +31,7 @@ namespace WebFamilyHome.Controllers
         {
             var user = new User
             {
-                Username = username,
+                UserName = username,
                 PasswordHash = HashPassword(password),
                 GroupId = groupId
             };
@@ -46,12 +46,12 @@ namespace WebFamilyHome.Controllers
         public async Task<IActionResult> Login(string username, string password)
         {
             var user = await _context.Users.Include(u => u.Group)
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.UserName == username);
 
             if (user == null || user.PasswordHash != HashPassword(password))
                 return Unauthorized("Usuário ou senha inválidos");
 
-            return Ok(new { user.Username, Grupo = user.Group?.Name });
+            return Ok(new { user.UserName, Grupo = user.Group?.Name });
         }
     }
 }

@@ -1,20 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
+using WebFamilyHome.Models; // <- garante que Group seja encontrado
 
 namespace WebFamilyHome.Models
 {
-    [Table("Users")] // força o nome da tabela
-    public class User
+    [Table("Users")]
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
+        public string NomeCompleto { get; set; } = string.Empty;
 
-        [Required, StringLength(50)]
-        public string Username { get; set; } = string.Empty;
-
-        [Required]
-        public string PasswordHash { get; set; } = string.Empty;
-
-        public int GroupId { get; set; }
+        // Agora opcional
+        public int? GroupId { get; set; }
         public Group? Group { get; set; }
     }
 }

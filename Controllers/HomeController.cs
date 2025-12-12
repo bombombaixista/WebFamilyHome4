@@ -6,7 +6,7 @@ namespace WebFamilyHome.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Title"] = "Página Inicial";
+            ViewData["Title"] = "WebFamily";
             return View();
         }
 
@@ -18,7 +18,7 @@ namespace WebFamilyHome.Controllers
 
         public IActionResult Login()
         {
-            ViewData["Title"] = "Login";
+            ViewData["Title"] = "login";
             return View();
         }
 

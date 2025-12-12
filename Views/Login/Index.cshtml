@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+<h3>Informe suas credenciais para acessar o sistema</h3>
+
+<form asp-action="Login" method="post">
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">
+                <input type="text" name="email" class="form-control" />
+            </dd>
+
+            <dt class="col-sm-2">Senha</dt>
+            <dd class="col-sm-10">
+                <input type="password" name="password" class="form-control" />
+            </dd>
+        </dl>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+
+<hr />
+
+<div class="mt-3">
+    <p>Ainda não tem conta?</p>
+    <a asp-controller="Users" asp-action="Create" class="btn btn-success">
+        Criar Novo Usuário
+    </a>
+</div>
+
+@foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+{
+    <div class="alert alert-danger mt-3">@error.ErrorMessage</div>
+}

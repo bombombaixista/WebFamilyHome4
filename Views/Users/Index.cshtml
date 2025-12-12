@@ -1,28 +1,39 @@
-Ôªø@model IEnumerable<WebFamilyHome.Models.User>
+@model IEnumerable<WebFamilyHome.Models.User>
 
-<h1>Usu√°rios</h1>
+@{
+    ViewData["Title"] = "Usu·rios";
+}
+
+<h2>Usu·rios</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Criar Novo Usu·rio</a>
+</p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Username</th>
+            <th>Nome Completo</th>
+            <th>Email</th>
+            <th>Usu·rio</th>
             <th>Grupo</th>
-            <th>A√ß√µes</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@user.Username</td>
-                <td>@user.Group?.Name</td>
+                <td>@item.NomeCompleto</td>
+                <td>@item.Email</td>
+                <td>@item.UserName</td>
+                <td>@item.GroupId</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@user.Id">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Excluir</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Detalhes</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-<a asp-action="Create" class="btn btn-primary">Novo Usu√°rio</a>

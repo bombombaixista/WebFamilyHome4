@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebFamilyHome.Data;
 using WebFamilyHome.Models;
 
 namespace WebFamilyHome.Controllers
 {
+    [Authorize]
     public class GroupsController : Controller
     {
         private readonly AppDbContext _context;
